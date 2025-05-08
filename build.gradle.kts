@@ -16,6 +16,7 @@ java {
 
 repositories {
 	mavenCentral()
+	maven("https://jitpack.io")
 }
 
 dependencies {
@@ -32,7 +33,6 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")
-	implementation("com.github.EncryptorCode:pluralize4j:1.0.3")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
 
 }
