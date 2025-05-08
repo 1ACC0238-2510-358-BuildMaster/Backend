@@ -12,27 +12,27 @@ import lombok.Setter
 @Table(name = "components")
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor(force = true) // Constructor sin parámetros
 class Component(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0,
+    val id: Long = 0, // El valor predeterminado de 'id' para permitir la creación
 
-    val name: String,
-    val type: String,
-    val price: Double,
+    var name: String = "", // Asignación de valores predeterminados para facilitar el uso sin parámetros
+    var type: String = "",
+    var price: Double = 0.0,
 
     @Embedded
-    val specifications: Specifications,
+    var specifications: Specifications = Specifications("", "", 0, ""), // Constructor por defecto de Specifications
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
-    val category: Category,
+    var category: Category? = null, // Usar var para permitir la modificación
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manufacturer_id")
-    val manufacturer: Manufacturer
-){
+    var manufacturer: Manufacturer? = null // Usar var para permitir la modificación
+) {
     companion object {
         fun from(command: CreateComponentCommand, category: Category, manufacturer: Manufacturer): Component {
             return Component(
@@ -44,5 +44,17 @@ class Component(
                 manufacturer = manufacturer
             )
         }
+    }
+
+    fun updateWith(command: CreateComponentCommand, category: Category, manufacturer: Manufacturer): Component {
+        return Component(
+            id = this.id, // Mantener el id sin cambios al actualizar
+            name = command.name,
+            type = command.type,
+            price = command.price,
+            specifications = command.specifications,
+            category = category,
+            manufacturer = manufacturer
+        )
     }
 }

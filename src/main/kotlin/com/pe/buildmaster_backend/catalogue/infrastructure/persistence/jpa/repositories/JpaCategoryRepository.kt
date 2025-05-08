@@ -6,4 +6,4 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface JpaCategoryRepository : JpaRepository<Category, Long>, CategoryRepository
+interface JpaCategoryRepository : JpaRepository<Category, Long>

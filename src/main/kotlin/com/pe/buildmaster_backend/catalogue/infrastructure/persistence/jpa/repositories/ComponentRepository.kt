@@ -9,6 +9,7 @@ interface ComponentRepository {
     fun save(component: Component): Component
     fun findById(id: Long): Component?
     fun findAll(): List<Component>
+    fun deleteById(id: Long)
     fun search(
         type: String?,
         categoryId: Long?,
