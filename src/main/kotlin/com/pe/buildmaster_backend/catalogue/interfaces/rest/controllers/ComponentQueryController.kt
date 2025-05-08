@@ -6,7 +6,7 @@ import com.pe.buildmaster_backend.catalogue.domain.model.queries.SearchComponent
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/api/v1/components")
+@RequestMapping("/api/v1/catalogue")
 class ComponentQueryController(
     private val queryHandler: SearchComponentsQueryHandler
 ) {
