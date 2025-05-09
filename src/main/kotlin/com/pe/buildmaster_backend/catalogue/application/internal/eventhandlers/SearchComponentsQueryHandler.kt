@@ -7,15 +7,14 @@ import org.springframework.stereotype.Service
 
 @Service
 class SearchComponentsQueryHandler(
-    private val repository: ComponentRepository
+    private val componentRepository: ComponentRepository
 ) {
 
     fun handle(query: SearchComponentsQuery): List<Component> {
-        return repository.search(
+        return componentRepository.search(
+            query.name,
             query.type,
             query.categoryId,
-            query.minPrice,
-            query.maxPrice,
             query.manufacturerId
         )
     }
