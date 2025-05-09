@@ -9,11 +9,11 @@ interface ComponentRepository {
     fun save(component: Component): Component
     fun findById(id: Long): Component?
     fun findAll(): List<Component>
+    fun deleteById(id: Long)
     fun search(
+        name: String?,
         type: String?,
         categoryId: Long?,
-        minPrice: Double?,
-        maxPrice: Double?,
         manufacturerId: Long?
     ): List<Component>
 }
