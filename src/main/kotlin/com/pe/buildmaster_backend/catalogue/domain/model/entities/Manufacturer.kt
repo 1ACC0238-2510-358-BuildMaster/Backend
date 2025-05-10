@@ -1,9 +1,13 @@
 package com.pe.buildmaster_backend.catalogue.domain.model.entities
 
 import jakarta.persistence.*
+import lombok.Getter
+import lombok.Setter
 
 @Entity
 @Table(name = "manufacturers")
+@Getter
+@Setter
 class Manufacturer(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
