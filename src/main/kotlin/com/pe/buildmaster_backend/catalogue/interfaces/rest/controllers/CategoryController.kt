@@ -25,4 +25,5 @@ class CatalogueController(
         val result = manufacturerRepository.findAll()
         return ResponseEntity.ok(result)
     }
+
 }
