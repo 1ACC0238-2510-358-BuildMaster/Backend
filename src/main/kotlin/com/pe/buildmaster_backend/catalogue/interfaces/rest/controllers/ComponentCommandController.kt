@@ -17,7 +17,7 @@ class ComponentCommandController(
 
     @PostMapping
     fun createComponent(@RequestBody resource: CreateComponentResource): ResponseEntity<Component> {
-        println("🌐 RECURSO RECIBIDO: $resource")
+        println("RECURSO RECIBIDO: $resource")
         val command = ComponentMapper.toCreateCommand(resource)
         val component = commandHandler.handleCreate(command)
         return ResponseEntity.status(HttpStatus.CREATED).body(component)
