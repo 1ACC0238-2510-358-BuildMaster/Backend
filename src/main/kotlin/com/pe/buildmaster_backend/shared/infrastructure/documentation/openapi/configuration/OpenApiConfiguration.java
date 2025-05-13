@@ -12,19 +12,19 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @Configuration
 public class OpenApiConfiguration {
     @Bean
-    public OpenAPI micasitaPlatformOpenApi() {
+    public OpenAPI BuildMasterPlatformOpenApi() {
         // General configuration
         var openApi = new OpenAPI();
         openApi
                 .info(new Info()
-                        .title("MiCasita Platform API")
-                        .description("MiCasita Platform application REST API documentation.")
+                        .title("BuildMaster Platform API")
+                        .description("BuildMaster Platform application REST API documentation.")
                         .version("v1.0.0")
                         .license(new License().name("Apache 2.0")
                                 .url("https://springdoc.org")))
                 .externalDocs(new ExternalDocumentation()
-                        .description("MiCasita Platform Documentation")
-                        .url("https://github.com/SI729-2401-WS53-Grupo-MiCasita/Documentation"));
+                        .description("BuildMaster Platform Documentation")
+                        .url("https://github.com/1ACC0238-2510-358-BuildMaster/Documentation"));
         return openApi;
     }
 }
