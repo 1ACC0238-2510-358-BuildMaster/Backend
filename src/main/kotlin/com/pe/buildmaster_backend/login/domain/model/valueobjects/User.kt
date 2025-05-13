@@ -8,8 +8,6 @@ data class User(
     private var credential: Credential,
     val favorites: MutableList<Favorite> = mutableListOf()
 ) {
-    fun getCredential(): Credential = credential
-
     fun verifyCredentials(password: String): Boolean {
         return credential.verify(password)
     }

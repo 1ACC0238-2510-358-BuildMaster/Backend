@@ -10,8 +10,6 @@ data class Credential(
         return BCrypt.checkpw(password, hashPassword)
     }
 
-    fun getHashPassword(): String = hashPassword
-
     companion object {
         fun constructor(email: String, passwordPlano: String): Credential {
             val hash = BCrypt.hashpw(passwordPlano, BCrypt.gensalt())
