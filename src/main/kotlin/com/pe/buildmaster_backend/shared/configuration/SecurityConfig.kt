@@ -1,4 +1,4 @@
-package org.example.com.pe.buildmaster_backend.shared.configuration
+package com.pe.buildmaster_backend.shared.configuration
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
