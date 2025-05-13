@@ -11,16 +11,16 @@ object UserMapper {
 
     fun User.toEntity(): UserEntity = UserEntity(
         id = this.id,
-        email = this.credenciales.email,
-        passwordHash = this.credenciales.hashPassword,
-        name = this.perfil.name.value,
-        biografy = this.perfil.biografy,
-        fotoUrl = this.perfil.fotoUrl
+        email = this.getCredential().email,
+        passwordHash = this.getCredential().getHashPassword(),
+        name = this.profile.name.value,
+        biografy = this.profile.biografy,
+        fotoUrl = this.profile.fotoUrl
     )
 
     fun UserEntity.toDomain(): User = User(
         id = this.id,
-        perfil = Profile(Name(this.name), this.biografy, this.fotoUrl),
-        credenciales = Credential(this.email, this.passwordHash),
+        profile = Profile(Name(this.name), this.biografy, this.fotoUrl),
+        credential = Credential(this.email, this.passwordHash),
     )
 }
