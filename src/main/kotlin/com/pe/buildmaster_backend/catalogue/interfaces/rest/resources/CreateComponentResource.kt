@@ -10,3 +10,12 @@ data class CreateComponentResource(
     val categoryId: Long,
     val manufacturerId: Long
 )
+
+data class UpdateComponentResource(
+    val name: String,
+    val type: String,
+    val price: Double,
+    val specifications: Specifications,
+    val categoryId: Long,
+    val manufacturerId: Long
+)

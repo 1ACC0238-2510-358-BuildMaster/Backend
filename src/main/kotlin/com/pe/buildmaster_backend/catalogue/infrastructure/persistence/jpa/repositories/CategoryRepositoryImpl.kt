@@ -12,4 +12,8 @@ class CategoryRepositoryImpl(
     override fun findById(id: Long): Category? {
         return jpaRepository.findById(id).orElse(null)
     }
+
+    override fun findAll(): List<Category> {
+        return jpaRepository.findAll()
+    }
 }
