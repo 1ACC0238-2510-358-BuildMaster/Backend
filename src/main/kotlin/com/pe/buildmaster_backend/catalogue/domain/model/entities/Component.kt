@@ -7,6 +7,7 @@ import jakarta.persistence.*
 import lombok.Getter
 import lombok.NoArgsConstructor
 import lombok.Setter
+import java.util.Optional
 
 @Entity
 @Table(name = "components")
@@ -27,14 +28,15 @@ class Component(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
-    var category: Category? = null, // Usar var para permitir la modificación
+    var category: Category? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manufacturer_id")
-    var manufacturer: Manufacturer? = null // Usar var para permitir la modificación
+    var manufacturer: Manufacturer? = null
+
 ) {
     companion object {
-        fun from(command: CreateComponentCommand, category: Category, manufacturer: Manufacturer): Component {
+        fun from(command: CreateComponentCommand, category: Category?, manufacturer: Manufacturer?): Component {
             return Component(
                 name = command.name,
                 type = command.type,
@@ -46,9 +48,9 @@ class Component(
         }
     }
 
-    fun updateWith(command: CreateComponentCommand, category: Category, manufacturer: Manufacturer): Component {
+    fun updateWith(command: CreateComponentCommand, category: Category?, manufacturer: Manufacturer?): Component {
         return Component(
-            id = this.id, // Mantener el id sin cambios al actualizar
+            id = this.id,
             name = command.name,
             type = command.type,
             price = command.price,
