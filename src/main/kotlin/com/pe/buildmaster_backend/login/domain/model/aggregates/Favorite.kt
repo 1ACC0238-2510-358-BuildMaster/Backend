@@ -1,4 +1,4 @@
-package com.pe.buildmaster_backend.login.domain.model.valueobjects
+package com.pe.buildmaster_backend.login.domain.model.aggregates
 
 import java.time.LocalDateTime
 import java.util.*

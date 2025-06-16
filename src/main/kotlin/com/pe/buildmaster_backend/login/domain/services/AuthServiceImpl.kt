@@ -1,9 +1,9 @@
 package com.pe.buildmaster_backend.login.domain.services
 
 import com.pe.buildmaster_backend.login.domain.model.valueobjects.Profile
-import com.pe.buildmaster_backend.login.domain.model.valueobjects.Credential
+import com.pe.buildmaster_backend.login.domain.model.aggregates.Credential
 import com.pe.buildmaster_backend.login.domain.model.valueobjects.Name
-import com.pe.buildmaster_backend.login.domain.model.valueobjects.User
+import com.pe.buildmaster_backend.login.domain.model.aggregates.User
 import com.pe.buildmaster_backend.login.domain.security.JwtProvider
 import com.pe.buildmaster_backend.login.infrastructure.persistence.jpa.repositories.UserRepository
 import org.springframework.stereotype.Service

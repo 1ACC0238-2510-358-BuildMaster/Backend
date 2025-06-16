@@ -1,31 +1,58 @@
-package com.pe.buildmaster_backend.login.interfaces.rest.controllers;
+package com.pe.buildmaster_backend.login.interfaces.rest.controllers
 
-import com.pe.buildmaster_backend.login.domain.model.valueobjects.User
-import com.pe.buildmaster_backend.login.domain.services.AuthService;
-import org.springframework.http.HttpStatus
+import com.pe.buildmaster_backend.login.domain.services.UserApplicationService
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*
+import java.util.UUID
+
+data class RegisterRequest(val email: String, val password: String, val name: String)
+data class LoginRequest(val email: String, val password: String)
+data class UpdateProfileRequest(val biografy: String?, val fotoUrl: String?)
 
 @RestController
-@RequestMapping("/api/login")
+@RequestMapping("/api/auth")
 class AuthController(
-    private val authService:AuthService
+    private val userService: UserApplicationService
 ) {
+
     @PostMapping("/register")
-    fun register(@RequestBody dto: RegisterDTO): ResponseEntity<User> {
-        val user = authService.registrar(dto.email, dto.password, dto.nombre)
-        return ResponseEntity.status(HttpStatus.CREATED).body(user)
+    fun register(@RequestBody req: RegisterRequest): ResponseEntity<Void> {
+        userService.register(
+            email = req.email,
+            password = req.password,
+            name = req.name
+        )
+        return ResponseEntity.ok().build()
     }
+
     @PostMapping("/login")
-    fun login(@RequestBody dto: LoginDTO): ResponseEntity<TokenResponse> {
-        val token = authService.login(dto.email, dto.password)
-        return ResponseEntity.ok(TokenResponse(token))
+    fun login(@RequestBody req: LoginRequest): ResponseEntity<Map<String, String>> {
+        val token = userService.login(
+            email = req.email,
+            password = req.password
+        )
+        // return JWT (or whatever token) under "token" key
+        return ResponseEntity.ok(mapOf("token" to token))
+    }
+
+    @GetMapping("/users")
+    fun findByName(@RequestParam name: String): ResponseEntity<Any> {
+        val user = userService.findByName(name)
+            ?: return ResponseEntity.notFound().build()
+        // you can map your domain user to a DTO here
+        return ResponseEntity.ok(user)
+    }
+
+    @PutMapping("/users/{id}")
+    fun updateProfile(
+        @PathVariable id: UUID,
+        @RequestBody req: UpdateProfileRequest
+    ): ResponseEntity<Void> {
+        userService.updateProfile(
+            userId = id.toString(),
+            biografy = req.biografy,
+            fotoUrl = req.fotoUrl
+        )
+        return ResponseEntity.ok().build()
     }
 }
-
-data class RegisterDTO(val email: String, val password: String, val nombre: String)
-data class LoginDTO(val email: String, val password: String)
-data class TokenResponse(val token: String)

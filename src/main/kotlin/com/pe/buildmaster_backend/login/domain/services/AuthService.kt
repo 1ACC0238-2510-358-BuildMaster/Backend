@@ -1,6 +1,6 @@
 package com.pe.buildmaster_backend.login.domain.services
 
-import com.pe.buildmaster_backend.login.domain.model.valueobjects.User
+import com.pe.buildmaster_backend.login.domain.model.aggregates.User
 
 interface AuthService {
     fun login(email: String, password: String): String

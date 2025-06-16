@@ -1,5 +1,6 @@
-package com.pe.buildmaster_backend.login.domain.model.valueobjects
+package com.pe.buildmaster_backend.login.domain.model.aggregates
 
+import com.pe.buildmaster_backend.login.domain.model.valueobjects.Profile
 import java.util.*
 
 data class User(
