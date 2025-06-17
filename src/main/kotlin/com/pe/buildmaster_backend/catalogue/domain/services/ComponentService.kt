@@ -6,5 +6,4 @@ import org.springframework.stereotype.Service
 
 interface ComponentService {
     fun isCompatible(existing: Component, newSpecs: Specifications): Boolean
-
 }
