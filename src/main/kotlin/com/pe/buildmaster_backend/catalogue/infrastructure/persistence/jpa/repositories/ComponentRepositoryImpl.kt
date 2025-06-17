@@ -32,10 +32,10 @@ class ComponentRepositoryImpl(
         val predicates = mutableListOf<Predicate>()
 
         name?.let {
-            predicates.add(cb.like(root.get<String>("name"), "%$it%"))
+            predicates.add(cb.like(cb.lower(root.get("name")), "%${it.lowercase()}%"))
         }
         type?.let {
-            predicates.add(cb.equal(root.get<String>("type"), it))
+            predicates.add(cb.equal(cb.lower(root.get("type")), it.lowercase()))
         }
         categoryId?.let {
             predicates.add(cb.equal(root.get<Long>("category").get<Long>("id"), it))
