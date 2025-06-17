@@ -5,5 +5,6 @@ import java.util.UUID
 data class UserUpdatedEvent(
     val userId: UUID,
     val biografy: String?,
-    val fotoUrl: String?
+    val fotoUrl: String?,
+    val role: String
 )

@@ -1,9 +1,11 @@
 package com.pe.buildmaster_backend.login.domain.model.commands
 
-import java.util.UUID
+import com.pe.buildmaster_backend.login.domain.model.valueobjects.Profile
+import com.pe.buildmaster_backend.login.domain.model.valueobjects.Role
+import java.util.*
 
 data class UpdateUserCommand(
     val userId: UUID,
-    val biografy: String?,
-    val fotoUrl: String?
+    val profile: Profile,
+    val role: Role
 )

@@ -17,7 +17,8 @@ class RegisterUserCommandHandler(
             UserRegisteredEvent(
                 user.id,
                 user.getCredential().email,
-                user.profile.name.value
+                user.profile.name.value,
+                role = cmd.role
             )
         )
     }

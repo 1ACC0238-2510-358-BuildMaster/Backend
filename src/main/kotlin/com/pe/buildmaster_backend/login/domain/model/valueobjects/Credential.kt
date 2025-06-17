@@ -1,4 +1,4 @@
-package com.pe.buildmaster_backend.login.domain.model.aggregates
+package com.pe.buildmaster_backend.login.domain.model.valueobjects
 
 import org.springframework.security.crypto.bcrypt.BCrypt
 
