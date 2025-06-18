@@ -34,15 +34,17 @@ class AuthServiceImpl(
         val credenciales = Credential(email, password)
         val perfil = Profile(Name(name))
         val nuevoUsuario = User(profile = perfil, credential = credenciales, role = Role.USER) // Use Role.USER
+
         val userEntity = UserEntity(
-            id = nuevoUsuario.id,
+            id = null, // Ensure id is null for new entities
             email = credenciales.email,
-            passwordHash = credenciales.getHashPassword(), // Updated parameter
+            passwordHash = credenciales.getHashPassword(), // Correctly pass hashed password
             name = perfil.name.value,
-            role = nuevoUsuario.role, // Convert Role to String
-            biografy = perfil.biografy, // Added biografy
-            fotoUrl = perfil.fotoUrl // Added fotoUrl
+            biografy = perfil.biografy, // Ensure biografy is nullable
+            fotoUrl = perfil.fotoUrl, // Ensure fotoUrl is nullable
+            role = nuevoUsuario.role // Pass the role correctly
         )
+
         userRepository.save(userEntity)
         return nuevoUsuario
     }

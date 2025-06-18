@@ -4,13 +4,13 @@ import com.pe.buildmaster_backend.login.application.internal.eventhandlers.Login
 import com.pe.buildmaster_backend.login.domain.model.commands.LoginCommand
 import com.pe.buildmaster_backend.login.domain.model.valueobjects.Role
 import com.pe.buildmaster_backend.login.domain.services.UserApplicationService
+import com.pe.buildmaster_backend.login.interfaces.rest.DTO.LoginRequest
 import com.pe.buildmaster_backend.login.interfaces.rest.DTO.LoginResponse
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
 data class RegisterRequest(val email: String, val password: String, val name: String, val role: Role) // Added role
-data class LoginRequest(val email: String, val password: String, val requiredRole: String) // Added requiredRole
 data class UpdateProfileRequest(val biografy: String?, val fotoUrl: String?, val profile: String?, val role: String?) // Added profile and role
 
 @RestController
@@ -33,16 +33,18 @@ class AuthController(
 
     @PostMapping("/login")
     fun login(@RequestBody cmd: LoginRequest): ResponseEntity<LoginResponse> {
-        val result = loginCommandHandler.handle(
-            LoginCommand(
-                email = cmd.email,
-                password = cmd.password,
-                requiredRole = cmd.requiredRole
+        return try {
+            val result = loginCommandHandler.handle(
+                LoginCommand(
+                    email = cmd.email,
+                    password = cmd.password,
+                )
             )
-        )
-        return ResponseEntity.ok(LoginResponse(token = result.token, role = result.role))
+            ResponseEntity.ok(LoginResponse(token = result.token, role = result.role))
+        } catch (e: Exception) {
+            ResponseEntity.status(401).build() // Return 401 Unauthorized for failed login
+        }
     }
-
     @GetMapping("/users")
     fun findByName(@RequestParam name: String): ResponseEntity<Any> {
         val user = userService.findByName(name)
